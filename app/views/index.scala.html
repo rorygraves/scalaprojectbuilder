@@ -1,7 +1,72 @@
-@(message: String)
+@()
 
-@main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message)
-    
-}
+<html>
+    <head>
+        <title>Scala Project Builder</title>
+        <link rel="stylesheet" media="screen" href="/@@documentation/resources/style/main.css"></link>
+    </head>
+	<body>
+       	<section id="top">
+        	<div class="wrapper">
+                <h1>Scala Project Builder</a></h1>
+            </div>
+	   	</section>
+        
+      	<div id="content" class="wrapper doc">
+            <article id="main">
+ 				<h1>Welcome to the Scala Project Builder</h1>
+ 				<h2>About</h2>
+ 				<blockquote>
+ 					<p>
+ 					Please be aware, this can best be described as a 'beta' project.  I am using this as an excuse to learn
+ 					more about the underlying technologies as well as scratching a personal itch.
+ 					If you have comments/suggestions etc please email me sbt@@fieldmark.co.uk
+ 					</p>
+				</blockquote>
+ 				
+ 				<p>
+ 					This site is built to help you to kickstart a project.  You can use this site to generate a template
+ 					project configured 'ready to go' sbt project with a number of pre-configured features.  
+ 					The Scala ecosystem is amazing rich, but getting a project bootstrapped (even from the g8 templates) can
+ 					be time consuming and painful.  
+ 				 
+ 				</p>         
+ 				<h3>What it will do</h3>
+ 				<ul>
+					<li>Outline a project and download a 'ready to go' project with various features:
+						<ul>
+							<li> Play </li>
+							<li> Akka </li>
+							<li> Logging </li>
+							<li> IDE configuration (eclipse/intelliJ) <li>		
+						</ul>
+					</li>
+					<li>Help to select 'working' configurations of compatible features.</li>
+					<li>Create a project that can immediately be built.packaged and deployed</li>
+					<li><b>For Play</b> Provide a Heroku deployable project</li>
+					<li>Provide example code to work from</li>					
+					<li>Provide (where possible) as many links to the underlying documentation as possible (sbt,akka,play)</li> 					
+ 				</ul> 
+ 					
+ 				<h3>What it will <b>not</b> do</h3>
+ 				
+ 				<ul>
+ 					<li>Build an entire application (it is not a 'site builder')</li>
+ 					<li>Allow you to 'edit' a previously built and update project</li>
+ 				</ul> 
+ 				
+ 				
+ 				<h2>Lets do it!</h2>
+ 				
+ 				<a href="@routes.Application.builder()"> Click here to build a project </a>
+ 				
+ 				<h2>More information</h2>
+ 					
+        	</article>
+        </div>
+		
+		<hr/>
+		
+		 <a class="brand" href="@routes.Application.oldindex()">Old index</a>
+	</body>
+</html>
