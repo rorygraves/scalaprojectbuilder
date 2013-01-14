@@ -1,0 +1,56 @@
+@(builderForm : Form[BuilderStartForm])
+
+@import helper._
+
+<html>
+    <head>
+        <title>Scala Project Builder - Build</title>
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+       </head>
+	<body>
+		@helper.form(action = routes.Application.builderStartPost) {
+        
+    		<div id="header">
+            	<h1 >Scala Project Builder</a></h1>
+        	</div>
+
+      		<div id="left">
+      		
+	      		<ul>
+    	  			<li>Start</li>
+        			<li><input type="submit" name="submitType" class="submit" value="Play configuration"></li>
+        			<li><input type="submit" name="submitType" class="submit" value="Akka configuration"></li>
+        			<li><input type="submit" name="submitType" class="submit" value="Build Project"></li>      			
+      			</ul>
+				<br/>
+    			<a href="@routes.Application.index" class="submit">Cancel</a>
+      		</div>
+        
+      		<div id="center">
+       	    	<fieldset>
+            	<legend>Basic Project Information</legend>
+            
+            	@inputText(
+                	builderForm("projectName"),
+                	'placeholder -> "enter a project name", 
+                	'_label -> "Project Name", 
+                	'_error -> builderForm.globalError
+            	)
+
+				@select(
+				field = builderForm("projectType"), options = options(
+					"S29"  -> "Scala 2.9",
+					"S210" -> "Scala 2.10",
+					"A20"   -> "Akka 2.0.5",
+					"A21"  -> "Akka 2.1",
+					"P20"  -> "Play 2.0",
+					"P21"  -> "Play 2.1"
+					),
+          			'_label -> "Project Type",
+          			'_error -> builderForm("projectType").error.map(_.withMessage("Select project type"))
+          		)            
+        		</fieldset>
+        	</div>
+    	}
+	</body>
+</html>

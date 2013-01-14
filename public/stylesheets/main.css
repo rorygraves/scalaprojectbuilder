@@ -1,0 +1,57 @@
+body{ 
+	background-color:#dc8;
+	font-size:16px; 
+	margin:0; 
+	padding:0; 
+}
+
+#header{ 
+	background-color:#996633;
+	height:50px;
+}
+
+#left{ 
+	float:left;
+	width:200px;
+	background-color:#dc8; 
+	min-height:650px; /* for modern browsers */
+	height:auto !important; /* for modern browsers */
+	height:650px; /* for IE5.x and IE6 */
+}
+
+#center { 
+	margin-left:200px;
+	background-color:#eec; 
+	min-height:650px; /* for modern browsers */
+	height:auto !important; /* for modern browsers */
+	height:650px; /* for IE5.x and IE6 */
+}
+
+#footer { 
+	clear:both;
+	background-color:#333;
+	height:100px;
+}
+
+.submit {
+    background: transparent;
+    border: 0;
+    cursor:pointer;
+    margin: 0;
+    padding: 0;
+    color: #034af3;
+    text-decoration: underline;
+}
+
+.submit:visited {
+    color: #505abc;
+}
+
+.submit:hover {
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+.submit:active {
+    color: #12eb87;
+}

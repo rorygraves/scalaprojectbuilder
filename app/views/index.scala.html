@@ -58,15 +58,17 @@
  				
  				<h2>Lets do it!</h2>
  				
- 				<a href="@routes.Application.builder()"> Click here to build a project </a>
+ 				<a href="@routes.Application.builder_start()"> Click here to build a project </a>
  				
  				<h2>More information</h2>
  					
         	</article>
         </div>
 		
-		<hr/>
+		@if(play.api.Play.isDev(play.api.Play.current)) {
+			<hr/>
 		
-		 <a class="brand" href="@routes.Application.oldindex()">Old index</a>
+		 	<a class="brand" href="@routes.Application.oldindex()">Old index</a>
+		}
 	</body>
 </html>

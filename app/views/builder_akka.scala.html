@@ -1,0 +1,47 @@
+@(builderForm : Form[BuilderAkkaForm])
+
+@import helper._
+
+<html>
+    <head>
+        <title>Scala Project Builder - Build</title>
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+       </head>
+	<body>
+		@helper.form(action = routes.Application.builderAkkaPost) {
+        
+    		<div id="header">
+            	<h1 >Scala Project Builder</a></h1>
+        	</div>
+
+      		<div id="left">
+      		
+      			<ul>
+        			<li><input type="submit" name="submitType" class="submit" value="Start"></li>
+        			<li><input type="submit" name="submitType" class="submit" value="Play configuration"></li>
+      				<li>Akka configuration</li>
+        			<li><input type="submit" name="submitType" class="submit" value="Build Project"></li>      			
+      			</ul>
+
+				<br/>
+        		<a href="@routes.Application.index" class="submit">Cancel</a>
+				      		
+      		</div>
+        
+      		<div id="center">
+       	    	<fieldset>
+            	<legend>Akka configuration</legend>
+            
+             	@helper.checkbox(
+             		builderForm("enableRemoting"),
+                	'_label -> "Enable Remoting", 
+                	'_error -> builderForm.globalError
+             		)
+            
+        		</fieldset>
+        	
+        		</div>
+        	</div>
+    	}
+	</body>
+</html>
