@@ -37,6 +37,13 @@
                 	'_error -> builderForm.globalError
             	)
 
+            	@inputText(
+                	builderForm("projectVersion"),
+                	'placeholder -> "enter a version number", 
+                	'_label -> "Project Version", 
+                	'_error -> builderForm.globalError
+            	)
+
 				@select(
 				field = builderForm("projectType"), options = options(
 					"S29"  -> "Scala 2.9",

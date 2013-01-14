@@ -1,5 +1,5 @@
 package models
 
-case class BuilderStartForm(projectName : String,projectType : String,submitType : String) {
+case class BuilderStartForm(projectName : String,projectVersion : String,projectType : String,submitType : String) {
 	
 }

@@ -23,6 +23,7 @@ object Application extends Controller {
   val builderStartForm = Form(
     mapping(
       "projectName" -> text,
+      "projectVersion" -> text,
       "projectType" -> text,
       "submitType" -> nonEmptyText)(BuilderStartForm.apply)(BuilderStartForm.unapply))
 

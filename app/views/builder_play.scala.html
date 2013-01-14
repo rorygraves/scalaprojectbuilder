@@ -29,14 +29,12 @@
         
       		<div id="center">
        	    	<fieldset>
-            	<legend>Play configuration</legend>
+	            	<legend>Play configuration</legend>
             
-             	@helper.checkbox(
-             		builderForm("includeHerokuConfig"),
-                	'_label -> "Include Heroku Configuration file", 
-                	'_error -> builderForm.globalError
-             		)
-            
+    	         	@helper.checkbox(
+        	     		builderForm("includeHerokuConfig"),
+            	    	'_label -> "Include Heroku Configuration file", 
+                		'_error -> builderForm.globalError)
         		</fieldset>
         	
         	</div>
