@@ -13,6 +13,7 @@ import play.api.data.Forms._
 import models.BuilderBuildForm
 import play.api.Play.current
 import fly.play.sessionCache.SessionCache
+import code.builder.ZipBuilder
 
 /********************************************************************
  * Main application entry point
@@ -82,6 +83,22 @@ object Application extends Controller {
   }
 
   /********************************************************************************************
+   * Display action for builder build page
+   */
+  def builder_build = SessionCache { sessionCache =>
+    Action {
+        val formValue = sessionCache.get("buildForm") match {
+        	case Some(bbf : BuilderBuildForm ) =>
+        		builderBuildForm.fill(bbf)
+        	case _ =>
+        	  builderBuildForm
+    	} 
+        
+    	Ok(views.html.builder_build(formValue))
+    }
+  }
+
+  /********************************************************************************************
    * Handling of post clicks from builder akka page
    */
   def builderBuildPost = SessionCache { sessionCache =>
@@ -90,7 +107,10 @@ object Application extends Controller {
       errors => BadRequest("BuildPOSTErrors : " + errors),
       value => {
     	  sessionCache.set("buildForm",value)
-    	  processDirect(value.submitType)
+    	  if(value.submitType == "Build") {
+    	    Ok(ZipBuilder.build())
+    	  } else 
+    		  processDirect(value.submitType)
       })
     }
   }
@@ -157,21 +177,6 @@ object Application extends Controller {
     }
   }
 
-  /**
-   * ******************************************************************************************
-   * Display action for builder build page
-   */
-  def builder_build = SessionCache { sessionCache =>
-    Action {
-        val formValue = sessionCache.get("buildForm") match {
-        	case Some(bbf : BuilderBuildForm ) =>
-        		builderBuildForm.fill(bbf)
-        	case _ =>
-        	  builderBuildForm
-    	} 
-    	Ok(views.html.builder_build(formValue))
-    }
-  }
 
   /**
    * ******************************************************************************************

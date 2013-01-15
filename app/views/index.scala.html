@@ -3,16 +3,16 @@
 <html>
     <head>
         <title>Scala Project Builder</title>
-        <link rel="stylesheet" media="screen" href="/@@documentation/resources/style/main.css"></link>
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
     </head>
 	<body>
        	<section id="top">
-        	<div class="wrapper">
+        	<div id="header">
                 <h1>Scala Project Builder</a></h1>
             </div>
 	   	</section>
         
-      	<div id="content" class="wrapper doc">
+      	<div id="center">
             <article id="main">
  				<h1>Welcome to the Scala Project Builder</h1>
  				<h2>About</h2>
@@ -70,5 +70,9 @@
 		
 		 	<a class="brand" href="@routes.Application.oldindex()">Old index</a>
 		}
+		
+		 <div class="ribbon">
+    		<a href="https://github.com/rorygraves/scalaprojectbuilder">Fork me on GitHub</a>
+  		</div>
 	</body>
 </html>
