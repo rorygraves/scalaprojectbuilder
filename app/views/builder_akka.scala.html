@@ -5,16 +5,24 @@
 <html>
     <head>
         <title>Scala Project Builder - Build</title>
- 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-       </head>
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
+		@minified=@{ if (play.Play.isProd()) ".min" else "" }
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
+	</head>
 	<body>
 		@helper.form(action = routes.Application.builderAkkaPost) {
         
-    		<div id="header">
-            	<h1 >Scala Project Builder</a></h1>
-        	</div>
+		<div class="container">
+			<div class="row-fluid">
+  				<div class="span12" id="header">                
+  					<h1>Scala Project Builder</h1>
+  				</div>
+			</div> 
 
-      		<div id="left">
+			<div class="row-fluid">
+
+      		<div class="span2" id="left">
       		
       			<ul>
         			<li><input type="submit" name="submitType" class="submit" value="Start"></li>
@@ -28,20 +36,22 @@
 				      		
       		</div>
         
-      		<div id="center">
+      		<div class="span10" id="center">
        	    	<fieldset>
             	<legend>Akka configuration</legend>
             
              	@helper.checkbox(
              		builderForm("enableRemoting"),
                 	'_label -> "Enable Remoting", 
-                	'_error -> builderForm.globalError
+                	'_error -> builderForm.globalError,
+					'_help -> ""
              		)
             
         		</fieldset>
         	
         		</div>
         	</div>
+      		</div>
     	}
 	</body>
 </html>

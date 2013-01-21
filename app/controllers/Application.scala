@@ -1,19 +1,12 @@
 package controllers
 
-import play.api._
+import _root_.models.{BuilderBuildForm, BuilderPlayForm, BuilderAkkaForm, BuilderStartForm}
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import play.api.data.validation.Constraints._
-import models.BuilderStartForm
-import models.BuilderPlayForm
-import models.BuilderAkkaForm
-import play.api.data._
-import play.api.data.Forms._
-import models.BuilderBuildForm
 import play.api.Play.current
 import fly.play.sessionCache.SessionCache
-import code.builder.ZipBuilder
+import code.builder.BuildConfig
 
 /********************************************************************
  * Main application entry point
@@ -44,6 +37,20 @@ object Application extends Controller {
     mapping(
       "submitType" -> nonEmptyText)(BuilderBuildForm.apply)(BuilderBuildForm.unapply))
 
+      
+
+  /********************************************************************************************
+   * Display action for builder start configuration page
+   */
+  def builder_start =  SessionCache { sessionCache => 
+    Action {
+        val buildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+        val startForm = builderStartForm.fill(buildConfig.startForm)
+    	Ok(views.html.builder_start(startForm))
+    }
+  }
+    
+      
   /********************************************************************************************
    * Handling of post clicks from start form
    */
@@ -51,10 +58,25 @@ object Application extends Controller {
     builderStartForm.bindFromRequest.fold(
       errors => BadRequest("Errors : " + errors),
       formValue => {
-        sessionCache.set("startForm", formValue, 0);
+        val currentBuildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+        val newBuildConfig = currentBuildConfig.updateStartForm(formValue)
+        sessionCache.set("buildConfig", newBuildConfig, 0)
         processDirect(formValue.submitType)
       })
   } }
+
+  
+  /********************************************************************************************
+   * Display action for builder play configuration page
+   */
+  def builder_play = SessionCache { sessionCache =>
+    Action {
+        val buildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+        val playForm = builderPlayForm.fill(buildConfig.playForm)
+    	Ok(views.html.builder_play(playForm))
+    }
+  }
+
 
   /********************************************************************************************
    * Handling of post clicks from builder play page
@@ -63,11 +85,25 @@ object Application extends Controller {
     builderPlayForm.bindFromRequest.fold(
       errors => BadRequest("Errors : " + errors),
       formValue => {
-        sessionCache.set("playForm", formValue, 0);
+        val currentBuildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+        val newBuildConfig = currentBuildConfig.updatePlayForm(formValue)
+        sessionCache.set("buildConfig", newBuildConfig, 0)
         processDirect(formValue.submitType)
       })
   }}
 
+  
+  /********************************************************************************************
+   * Display action for builder play configuration page
+   */
+  def builder_akka = SessionCache { sessionCache => 
+    Action {
+        val buildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+        val akkaForm = builderAkkaForm.fill(buildConfig.akkaForm)
+    	Ok(views.html.builder_akka(akkaForm))
+    }
+  }
+  
   /********************************************************************************************
    * Handling of post clicks from builder akka page
    */
@@ -75,9 +111,11 @@ object Application extends Controller {
     Action { implicit request =>
       builderAkkaForm.bindFromRequest.fold(
         errors => BadRequest("Errors : " + errors),
-        value => {
-          sessionCache.set("akkaForm",value)
-          processDirect(value.submitType)
+        formValue => {
+        val currentBuildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+        val newBuildConfig = currentBuildConfig.updateAkkaForm(formValue)
+        sessionCache.set("buildConfig", newBuildConfig, 0)
+        processDirect(formValue.submitType)
         })
     }
   }
@@ -87,14 +125,8 @@ object Application extends Controller {
    */
   def builder_build = SessionCache { sessionCache =>
     Action {
-        val formValue = sessionCache.get("buildForm") match {
-        	case Some(bbf : BuilderBuildForm ) =>
-        		builderBuildForm.fill(bbf)
-        	case _ =>
-        	  builderBuildForm
-    	} 
-        
-    	Ok(views.html.builder_build(formValue))
+//        val currentBuildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+    	Ok(views.html.builder_build(builderBuildForm))
     }
   }
 
@@ -108,7 +140,9 @@ object Application extends Controller {
       value => {
     	  sessionCache.set("buildForm",value)
     	  if(value.submitType == "Build") {
-    	    Ok(ZipBuilder.build())
+//    	    val buildConfig = generateBuildConfig(sessionCache);
+    	    Ok("Resulting zip")
+//    	    Ok(ZipBuilder.build())
     	  } else 
     		  processDirect(value.submitType)
       })
@@ -131,51 +165,6 @@ object Application extends Controller {
     }
   }
 
-  /********************************************************************************************
-   * Display action for builder start configuration page
-   */
-  def builder_start =  SessionCache { sessionCache => 
-    Action {
-        val formValue = sessionCache.get("startForm") match {
-        	case Some(bsf : BuilderStartForm ) =>
-        		builderStartForm.fill(bsf)
-        	case _ =>
-        	  builderStartForm
-    	} 
-    	Ok(views.html.builder_start(formValue))
-    }
-  }
-    
-
-  /********************************************************************************************
-   * Display action for builder play configuration page
-   */
-  def builder_play = SessionCache { sessionCache =>
-    Action {
-        val formValue = sessionCache.get("playForm") match {
-        	case Some(bpf : BuilderPlayForm ) =>
-        		builderPlayForm.fill(bpf)
-        	case _ =>
-        	  builderPlayForm
-    	} 
-    	Ok(views.html.builder_play(formValue))
-    }
-  }
-
-  /********************************************************************************************
-   * Display action for builder play configuration page
-   */
-  def builder_akka = SessionCache { sessionCache => 
-    Action {
-        val formValue = sessionCache.get("akkaForm") match {
-        	case Some(baf : BuilderAkkaForm ) =>
-        		builderAkkaForm.fill(baf)
-        	case _ =>
-        	  builderAkkaForm
-    	} 
-    	Ok(views.html.builder_akka(formValue))
-    }
-  }
 
 
   /**

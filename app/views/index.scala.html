@@ -3,17 +3,26 @@
 <html>
     <head>
         <title>Scala Project Builder</title>
- 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-    </head>
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
+		@minified=@{ if (play.Play.isProd) ".min" else "" }
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
+	</head>
 	<body>
-       	<section id="top">
-        	<div id="header">
-                <h1>Scala Project Builder</a></h1>
-            </div>
-	   	</section>
+		<div class="container">
+			<div class="row-fluid">
+  				<div class="span12" id="header">                
+  					<h1>Scala Project Builder</h1>
+  				</div>
+			</div> 
+
+  			<div class="row-fluid">
+    			<div class="span2" id="left">
+    		  		<!--Sidebar content-->
+    			</div>
+    			<div class="span10" id="center">
+
         
-      	<div id="center">
-            <article id="main">
  				<h1>Welcome to the Scala Project Builder</h1>
  				<h2>About</h2>
  				<blockquote>
@@ -38,7 +47,7 @@
 							<li> Play </li>
 							<li> Akka </li>
 							<li> Logging </li>
-							<li> IDE configuration (eclipse/intelliJ) <li>		
+							<li> IDE configuration (eclipse/intelliJ) </li>
 						</ul>
 					</li>
 					<li>Help to select 'working' configurations of compatible features.</li>
@@ -61,10 +70,12 @@
  				<a href="@routes.Application.builder_start()"> Click here to build a project </a>
  				
  				<h2>More information</h2>
+
+
+    			</div>
+  			</div>
+		</div>
  					
-        	</article>
-        </div>
-		
 		@if(play.api.Play.isDev(play.api.Play.current)) {
 			<hr/>
 		

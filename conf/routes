@@ -18,6 +18,9 @@ POST    /builder_akka              	controllers.Application.builderAkkaPost
 GET		/builder_build				controllers.Application.builder_build
 POST    /builder_build             	controllers.Application.builderBuildPost
 
+GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/img/glyphicons-halflings-white.png")
+GET     /assets/img/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/img/glyphicons-halflings.png")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
