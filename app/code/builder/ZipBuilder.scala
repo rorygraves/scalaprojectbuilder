@@ -6,16 +6,21 @@ import java.io.ByteArrayOutputStream
 
 object ZipBuilder {
 
-  def build() : Array[Byte] = {
-    val baos = new ByteArrayOutputStream();
-    val zos = new ZipOutputStream(baos);
-    
+  def build(): Array[Byte] = {
+    val baos = new ByteArrayOutputStream()
+    val zos = new ZipOutputStream(baos)
+
     zos.putNextEntry(new ZipEntry("README.txt"))
-      val data = "TEST1234".getBytes();
-      zos.write(data, 0, data.length);
-    zos.closeEntry();
-    
-    
-    return baos.toByteArray();
-  } 
+    val data = "TEST1234".getBytes()
+    zos.write(data, 0, data.length)
+    zos.closeEntry()
+
+    val dirEntry = new ZipEntry("test/")
+    zos.putNextEntry(dirEntry)
+    zos.closeEntry()
+
+    zos.close()
+
+    baos.toByteArray()
+  }
 }

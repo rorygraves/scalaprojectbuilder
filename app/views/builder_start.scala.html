@@ -5,10 +5,10 @@
 <html>
     <head>
         <title>Scala Project Builder - Build</title>
- 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
 		@minified=@{ if (play.Play.isProd()) ".min" else "" }
-			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")">
-			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")">    
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
    </head>
 	<body>
 		@helper.form(action = routes.Application.builderStartPost) {
@@ -16,7 +16,7 @@
 		<div class="container">
 			<div class="row-fluid">
   				<div class="span12" id="header">                
-  					<h1>Scala Project Builder</a></h1>
+  					<h1>Scala Project Builder</h1>
   				</div>
 			</div> 
 
@@ -54,12 +54,8 @@
 
 				@select(
 				field = builderForm("projectType"), options = options(
-					"S29"  -> "Scala 2.9",
 					"S210" -> "Scala 2.10",
-					"A20"   -> "Akka 2.0.5",
-					"A21"  -> "Akka 2.1",
-					"P20"  -> "Play 2.0",
-					"P21"  -> "Play 2.1"
+					"P21"  -> "Play 2.1-M2"
 					),
           			'_label -> "Project Type",
           			'_error -> builderForm("projectType").error.map(_.withMessage("Select project type"))

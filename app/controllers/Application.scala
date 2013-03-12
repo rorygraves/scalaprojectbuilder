@@ -6,7 +6,17 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.Play.current
 import fly.play.sessionCache.SessionCache
-import code.builder.BuildConfig
+import code.builder.{BuildValidationError, ZipBuilder, BuildConfig}
+import play.api.libs.iteratee.Enumerator
+import java.io.ByteArrayInputStream
+
+
+// TODO IDEA Plugin for sbt projects
+// TODO cleanup akka inports
+// TODO Read/filter/export zip file
+// TODO Validation checks on build page
+// TODO sort out margins on display
+// TODO Scala 2.10/Akka 2.1 project (do we even bother with 2.9?
 
 /********************************************************************
  * Main application entry point
@@ -125,8 +135,9 @@ object Application extends Controller {
    */
   def builder_build = SessionCache { sessionCache =>
     Action {
-//        val currentBuildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
-    	Ok(views.html.builder_build(builderBuildForm))
+      val currentBuildConfig = sessionCache.getOrElse("buildConfig")(new BuildConfig())
+      val errors: List[BuildValidationError] = currentBuildConfig.errors
+    	Ok(views.html.builder_build(builderBuildForm,errors))
     }
   }
 
@@ -140,10 +151,15 @@ object Application extends Controller {
       value => {
     	  sessionCache.set("buildForm",value)
     	  if(value.submitType == "Build") {
-//    	    val buildConfig = generateBuildConfig(sessionCache);
-    	    Ok("Resulting zip")
-//    	    Ok(ZipBuilder.build())
-    	  } else 
+          val bytes = ZipBuilder.build();
+          val file = new java.io.File("test.zip")
+          val fileContent: Enumerator[Array[Byte]] = Enumerator.fromStream(new ByteArrayInputStream(bytes))
+
+          SimpleResult(
+            header = ResponseHeader(200, Map(CONTENT_LENGTH -> bytes.length.toString)),
+            body = fileContent
+          )
+    	  } else
     		  processDirect(value.submitType)
       })
     }
@@ -164,8 +180,6 @@ object Application extends Controller {
         BadRequest("Unknown redirect")
     }
   }
-
-
 
   /**
    * ******************************************************************************************

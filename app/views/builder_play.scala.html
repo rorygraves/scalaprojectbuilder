@@ -6,17 +6,17 @@
     <head>
         <title>Scala Project Builder - Build</title>
  		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-		@minified=@{ if (play.Play.isProd()) ".min" else "" }
+		@minified=@{ if (play.Play.isProd) ".min" else "" }
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")">
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")">    
    </head>
 	<body>
-		@helper.form(action = routes.Application.builderPlayPost) {
+		@helper.form(action = routes.Application.builderPlayPost()) {
         
 		<div class="container">
 			<div class="row-fluid">
   				<div class="span12" id="header">                
-  					<h1>Scala Project Builder</a></h1>
+  					<h1>Scala Project Builder</h1>
   				</div>
 			</div> 
 

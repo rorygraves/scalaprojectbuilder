@@ -1,22 +1,23 @@
-@(builderForm : Form[BuilderBuildForm])
+@(builderForm : Form[BuilderBuildForm],errors: List[code.builder.BuildValidationError])
 
 @import helper._
 
 <html>
     <head>
         <title>Scala Project Builder - Build</title>
- 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+ 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
 		@minified=@{ if (play.Play.isProd()) ".min" else "" }
-			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")">
-			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")">    
-	</head>
+
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
+    </head>
 	<body>
 		@helper.form(action = routes.Application.builderBuildPost) {
         
 		<div class="container">
 			<div class="row-fluid">
   				<div class="span12" id="header">                
-  					<h1>Scala Project Builder</a></h1>
+  					<h1>Scala Project Builder</h1>
   				</div>
 			</div> 
 
@@ -35,8 +36,25 @@
         
       			<div class="span10" id="center">
       				<h2>Build it</h2>
-            		
-            		<input type="submit" name="submitType" value="Build">
+
+                    @if(errors.size > 0) {
+
+                        <div>
+                            <h3> Errors </h3>
+                            <ul>
+                            @errors.map { error =>
+                                <li>@error.errorMessage</li>
+                            }
+                            </ul>
+
+                            Correct errors before building the project
+                        </div>
+                    } else {
+                        <div>
+                             The project is ready to go, click 'Build' to generate the project.
+                            <input type="submit" name="submitType" value="Build">
+                        </div>
+                    }
         		</div>
     		</div>
 		</div>

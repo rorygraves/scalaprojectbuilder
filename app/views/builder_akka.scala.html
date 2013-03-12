@@ -6,12 +6,12 @@
     <head>
         <title>Scala Project Builder - Build</title>
  		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
-		@minified=@{ if (play.Play.isProd()) ".min" else "" }
+		@minified=@{ if (play.Play.isProd) ".min" else "" }
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
 	</head>
 	<body>
-		@helper.form(action = routes.Application.builderAkkaPost) {
+		@helper.form(action = routes.Application.builderAkkaPost()) {
         
 		<div class="container">
 			<div class="row-fluid">
@@ -32,7 +32,7 @@
       			</ul>
 
 				<br/>
-        		<a href="@routes.Application.index" class="submit">Cancel</a>
+        		<a href="@routes.Application.index()" class="submit">Cancel</a>
 				      		
       		</div>
         
@@ -49,9 +49,9 @@
             
         		</fieldset>
         	
-        		</div>
-        	</div>
-      		</div>
+            </div>
+        </div>
+
     	}
 	</body>
 </html>
