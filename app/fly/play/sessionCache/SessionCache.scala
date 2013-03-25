@@ -9,6 +9,7 @@ import play.api.mvc.PlainResult
 import play.api.Application
 import play.api.mvc.RequestHeader
 import play.api.libs.concurrent.Execution.Implicits._
+import scala.reflect.ClassTag
 
 /**
  * Essentially has the same interface as the regular built-in cache
@@ -41,7 +42,7 @@ trait SessionCache {
    * @param expiration expiration period in seconds.
    * @param orElse The default function to invoke if the value was found in cache.
    */  
-  def getOrElse[A](key: String, expiration: Int = 0)(orElse: => A)(implicit app: Application, m: ClassManifest[A]): A
+  def getOrElse[A](key: String, expiration: Int = 0)(orElse: => A)(implicit app: Application, m: ClassTag[A]): A
 
   /**
    * Retrieve a value from the cache for the given type
@@ -122,9 +123,7 @@ object SessionCache {
       case r: AsyncResult =>
         AsyncResult(r.result map (addCookieToResult(cookie, _)))
 
-      case r: PlainResult => r.withCookies(cookie)
-
-      case r => r
+      	case r: PlainResult => r.withCookies(cookie)
     }
 
 }

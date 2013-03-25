@@ -15,8 +15,9 @@ object ApplicationBuild extends Build {
     (base / "app" / "assets" / "stylesheets" * "*.less")
     )
 
-  val appDependencies = Seq()
-    //"nl.rhinofly" %% "session-cache" % "1.0.0")
+  val appDependencies = Seq(
+  	"org.specs2" %% "specs2" % "1.14" % "test")
+//"nl.rhinofly" %% "session-cache" % "1.0.0")
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
 //    resolvers += "Rhinofly Internal Repository" at "http://maven-repository.rhinofly.net:8081/artifactory/libs-release-local",

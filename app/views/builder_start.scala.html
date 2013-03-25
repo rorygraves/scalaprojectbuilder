@@ -2,6 +2,8 @@
 
 @import helper._
 
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
 <html>
     <head>
         <title>Scala Project Builder - Build</title>
@@ -13,58 +15,75 @@
 	<body>
 		@helper.form(action = routes.Application.builderStartPost) {
         
-		<div class="container">
-			<div class="row-fluid">
-  				<div class="span12" id="header">                
-  					<h1>Scala Project Builder</h1>
-  				</div>
+		<div class="container-fluid">
+			<div class="navbar" id="header">
+				<h1>Scala Project Builder</h1>
 			</div> 
 
-			<div class="row-fluid">
-
-      		<div class="span2" id="left">
-      		
-	      		<ul>
-    	  			<li>Start</li>
-        			<li><input type="submit" name="submitType" class="submit" value="Play configuration"></li>
-        			<li><input type="submit" name="submitType" class="submit" value="Akka configuration"></li>
-        			<li><input type="submit" name="submitType" class="submit" value="Build Project"></li>      			
-      			</ul>
-				<br/>
-    			<a href="@routes.Application.index" class="submit">Cancel</a>
-      		</div>
-        
-      		<div class="span10" id="center">
-       	    	<fieldset>
-            	<legend>Basic Project Information</legend>
+  			<div class="row-fluid columns"> 
+				<div class="span12 content-area" id="center">
+       	    		<fieldset>
+            			<legend>Basic Project Information</legend>
             
-            	@inputText(
-                	builderForm("projectName"),
-                	'placeholder -> "enter a project name", 
-                	'_label -> "Project Name", 
-                	'_error -> builderForm.globalError
-            	)
+            
+ 			           	@inputText(
+            		    	builderForm("projectName"),
+                			'placeholder -> "enter a project name", 
+                			'_label -> "Project Name", 
+                			'_error -> builderForm.globalError
+            			)		
 
-            	@inputText(
-                	builderForm("projectVersion"),
-                	'placeholder -> "enter a version number", 
-                	'_label -> "Project Version", 
-                	'_error -> builderForm.globalError
-            	)
+            			@inputText(
+                			builderForm("projectVersion"),
+                			'placeholder -> "enter a version number", 
+                			'_label -> "Project Version", 
+                			'_error -> builderForm.globalError
+            			)
 
-				@select(
-				field = builderForm("projectType"), options = options(
-					"S210" -> "Scala 2.10",
-					"P21"  -> "Play 2.1-M2"
-					),
-          			'_label -> "Project Type",
-          			'_error -> builderForm("projectType").error.map(_.withMessage("Select project type"))
-          		)            
-        		</fieldset>
-        	</div>
-        	
+						@select(
+							field = builderForm("projectType"), options = options(
+								"S210" -> "Scala 2.10",
+								"P21"  -> "Play 2.1"
+							),
+          					'_label -> "Project Type",
+          					'_error -> builderForm("projectType").error.map(_.withMessage("Select project type"))
+          				)            
+        			</fieldset>
+        			
+	       	    	<fieldset>
+		            	<legend>Play configuration</legend>
+        	    
+    	    	     	@helper.checkbox(
+        	    	 		builderForm("includeHerokuConfig"),
+            	    		'_label -> "Include Heroku Configuration file", 
+                			'_error -> builderForm.globalError,
+							'_help -> ""
+             			)
+                		
+        			</fieldset>
+	       	    	<fieldset>
+    		        	<legend>Akka configuration</legend>
+            
+    			     	@helper.checkbox(
+             				builderForm("enableRemoting"),
+		                	'_label -> "Enable Remoting", 
+        		        	'_error -> builderForm.globalError,
+                			'class -> "input-xlarge",
+							'_help -> ""
+        		     		)
+            
+    				</fieldset>
+                    <div>
+                         Click the button to build: 
+                        <input type="submit" name="submitType" value="Build">
+    					<p/>
+    
+        				Or click <a href="@routes.Application.index" class="submit">Cancel</a> to go back.
+                    </div>
+        			
+        		</div>
 			</div> 
-        	
+		</div> 
     	}
 	</body>
 </html>

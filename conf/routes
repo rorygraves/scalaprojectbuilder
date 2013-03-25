@@ -4,19 +4,9 @@
 
 # Home page
 GET     /                           controllers.Application.index
-GET 	/oldindex 					controllers.Application.oldindex
 
 GET		/builder_start				controllers.Application.builder_start
 POST    /builder_start              controllers.Application.builderStartPost
-
-GET		/builder_play				controllers.Application.builder_play
-POST    /builder_play              controllers.Application.builderPlayPost
-
-GET		/builder_akka				controllers.Application.builder_akka
-POST    /builder_akka              	controllers.Application.builderAkkaPost
-
-GET		/builder_build				controllers.Application.builder_build
-POST    /builder_build             	controllers.Application.builderBuildPost
 
 GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/img/glyphicons-halflings-white.png")
 GET     /assets/img/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/img/glyphicons-halflings.png")

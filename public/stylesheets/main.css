@@ -5,23 +5,53 @@ body{
 	padding:0; 
 }
 
+body, html, .container-fluid { /// take all available height
+  height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.article-tree {
+  color: #DCE6E5;
+  background: #2F323B;
+}
+
+.content-area {
+  overflow: auto;
+  height: 100%; /// explicit height to make scrolling work
+}
+
+.columns {
+  height: 100%; /// columns should take all height
+  margin-top: 42px; /// minus header
+  margin-bottom: 20px; // minus footer
+}
+
+.columns > div {
+    height: 100%; // make each column to take all available height
+}
+
+.footer {
+  background: red;
+  height: 20px;
+}
+
+
 #header{ 
 	background-color:#996633;
 	height:70px;
+	padding-top: 1px;
+	padding-left: 20px;
 }
 
 #left{ 
-	background-color:#dc8; 
-	min-height:650px; /* for modern browsers */
-	height:auto !important; /* for modern browsers */
-	height:650px; /* for IE5.x and IE6 */
+	padding-left: 5px;
+	background-color:#dc8;
 }
 
 #center { 
+	padding-left: 15px;
 	background-color:#eec; 
-	min-height:650px; /* for modern browsers */
-	height:auto !important; /* for modern browsers */
-	height:650px; /* for IE5.x and IE6 */
 }
 
 .submit {

@@ -9,20 +9,13 @@
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
 	</head>
 	<body>
-		<div class="container">
-			<div class="row-fluid">
-  				<div class="span12" id="header">                
-  					<h1>Scala Project Builder</h1>
-  				</div>
+		<div class="container-fluid">
+			<div class="navbar" id="header">
+				<h1>Scala Project Builder</h1>
 			</div> 
 
-  			<div class="row-fluid">
-    			<div class="span2" id="left">
-    		  		<!--Sidebar content-->
-    			</div>
-    			<div class="span10" id="center">
-
-        
+  			<div class="row-fluid columns"> 
+			<div class="span12 content-area" id="center">
  				<h1>Welcome to the Scala Project Builder</h1>
  				<h2>About</h2>
  				<blockquote>
@@ -76,13 +69,7 @@
   			</div>
 		</div>
  					
-		@if(play.api.Play.isDev(play.api.Play.current)) {
-			<hr/>
-		
-		 	<a class="brand" href="@routes.Application.oldindex()">Old index</a>
-		}
-		
-		 <div class="ribbon">
+		<div class="ribbon">
     		<a href="https://github.com/rorygraves/scalaprojectbuilder">Fork me on GitHub</a>
   		</div>
 	</body>

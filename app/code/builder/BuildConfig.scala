@@ -1,8 +1,6 @@
 package code.builder
 
-import models.BuilderPlayForm
 import models.BuilderStartForm
-import models.BuilderAkkaForm
 import scala.collection.immutable.List
 import scala.collection.mutable.ListBuffer
 import java.io.ByteArrayOutputStream
@@ -11,13 +9,11 @@ import java.util.zip.{ZipInputStream, ZipOutputStream}
 /**
  * A complete build configuration, based on the various form submissions
  */
-case class BuildConfig(startForm : BuilderStartForm,playForm : BuilderPlayForm,akkaForm : BuilderAkkaForm) {
+case class BuildConfig(startForm : BuilderStartForm) {
   
-  def this()  = this(new BuilderStartForm(),new BuilderPlayForm(),new BuilderAkkaForm()) 
+  def this()  = this(new BuilderStartForm()) 
   
-  def updateStartForm(newStartForm : BuilderStartForm) = new BuildConfig(newStartForm,playForm,akkaForm)
-  def updatePlayForm(newPlayForm : BuilderPlayForm) = new BuildConfig(startForm,newPlayForm,akkaForm)
-  def updateAkkaForm(newAkkaForm : BuilderAkkaForm) = new BuildConfig(startForm,playForm,newAkkaForm)
+  def updateStartForm(newStartForm : BuilderStartForm) = new BuildConfig(newStartForm)
   
 
   def isEmpty(s : String) = s == null || s.trim.equals("")
