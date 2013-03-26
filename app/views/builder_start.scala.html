@@ -1,16 +1,17 @@
 @(builderForm : Form[BuilderStartForm])
 
 @import helper._
+@import helpers.checkbox
 
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+@implicitFieldConstructor = @{ FieldConstructor(helpers.twitterBootstrapInput.f) }
 
 <html>
     <head>
         <title>Scala Project Builder - Build</title>
- 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
 		@minified=@{ if (play.Play.isProd()) ".min" else "" }
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
    </head>
 	<body>
 		@helper.form(action = routes.Application.builderStartPost, 'class -> "form-horizontal") {
@@ -53,7 +54,7 @@
 	       	    	<fieldset>
 		            	<legend>Play configuration</legend>
         	    
-    	    	     	@helper.checkbox(
+    	    	     	@checkbox(
         	    	 		builderForm("includeHerokuConfig"),
                             '_text -> "Include Heroku Configuration file",
             	    		'_label -> None,
@@ -65,7 +66,7 @@
 	       	    	<fieldset>
     		        	<legend>Akka configuration</legend>
             
-    			     	@helper.checkbox(
+    			     	@checkbox(
              				builderForm("enableRemoting"),
                             '_text -> "Enable Remoting",
 		                	'_label -> None, 

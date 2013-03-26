@@ -38,7 +38,8 @@ body, html, .container-fluid { /// take all available height
 
 
 #header{ 
-	background-color:#996633;
+	/*background-color:#996633;*/
+  background-color: #907C2C;
 	height:70px;
 	padding-top: 1px;
 	padding-left: 20px;
@@ -104,4 +105,12 @@ body, html, .container-fluid { /// take all available height
     text-decoration: none;
     /* shadow */
     text-shadow: 0 0 0.5em #444;
+  }
+
+  .controls {
+    vertical-align: middle;
+  }
+
+  .controls span {
+    vertical-align: middle;
   }
