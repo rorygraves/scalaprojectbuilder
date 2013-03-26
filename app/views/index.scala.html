@@ -3,10 +3,10 @@
 <html>
     <head>
         <title>Scala Project Builder</title>
- 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
 		@minified=@{ if (play.Play.isProd) ".min" else "" }
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap"+ minified + ".css")"/>
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive"+ minified + ".css")"/>
+			<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -18,13 +18,11 @@
 			<div class="span12 content-area" id="center">
  				<h1>Welcome to the Scala Project Builder</h1>
  				<h2>About</h2>
- 				<blockquote>
- 					<p>
+ 				<div class="alert alert-block alert-success">
  					Please be aware, this can best be described as a 'beta' project.  I am using this as an excuse to learn
  					more about the underlying technologies as well as scratching a personal itch.
  					If you have comments/suggestions etc please email me sbt@@fieldmark.co.uk
- 					</p>
-				</blockquote>
+ 				</div>
  				
  				<p>
  					This site is built to help you to kickstart a project.  You can use this site to generate a template
