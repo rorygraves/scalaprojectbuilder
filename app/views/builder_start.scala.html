@@ -2,7 +2,7 @@
 
 @import helper._
 
-<@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 <html>
     <head>
@@ -55,7 +55,8 @@
         	    
     	    	     	@helper.checkbox(
         	    	 		builderForm("includeHerokuConfig"),
-            	    		'_label -> "Include Heroku Configuration file", 
+                            '_text -> "Include Heroku Configuration file",
+            	    		'_label -> None,
                 			'_error -> builderForm.globalError,
 							'_help -> ""
              			)
@@ -66,7 +67,8 @@
             
     			     	@helper.checkbox(
              				builderForm("enableRemoting"),
-		                	'_label -> "Enable Remoting", 
+                            '_text -> "Enable Remoting",
+		                	'_label -> None, 
         		        	'_error -> builderForm.globalError,
                 			'class -> "input-xlarge",
 							'_help -> ""
